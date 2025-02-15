@@ -1,5 +1,8 @@
 const std = @import("std");
 
+const color = @import("color.zig");
+const vec3 = @import("vec3.zig");
+
 pub fn main() !void {
     const stdout = std.io.getStdOut().writer();
 
@@ -16,11 +19,9 @@ pub fn main() !void {
             const g = @as(f64, @floatFromInt(j)) / @as(f64, image_height - 1);
             const b = 0.0;
 
-            const ir: i32 = @intFromFloat(255.999 * r);
-            const ig: i32 = @intFromFloat(255.999 * g);
-            const ib: i32 = @intFromFloat(255.999 * b);
+            const pixel_color = vec3.Vec3().init(r, g, b);
 
-            try stdout.print("{d} {d} {d}\n", .{ ir, ig, ib });
+            try color.write_color(stdout, pixel_color);
         }
     }
 }
