@@ -76,4 +76,4 @@ pub fn Vec3() type {
 }
 
 // Point3 is just a Vec3, but useful for geometric clarity in the code.
-const Point3 = Vec3;
+pub const Point3 = Vec3();
