@@ -53,8 +53,12 @@ pub fn Vec3() type {
             return Self{ self.e[0] * @as(f64, other), self.e[1] * @as(f64, other), self.e[2] * @as(f64, other) };
         }
 
-        pub fn div(comptime self: Self, comptime other: Self) Self {
-            return Self{ self.e[0] / other.e[0], self.e[1] / other.e[1], self.e[2] / other.e[2] };
+        pub fn div(comptime self: Self, comptime other: anytype) Self {
+            if (@TypeOf(other) == Vec3) {
+                return Self{ self.e[0] / other.e[0], self.e[1] / other.e[1], self.e[2] / other.e[2] };
+            }
+
+            return Self{ self.e[0] / @as(f64, other), self.e[1] / @as(f64, other), self.e[2] / @as(f64, other) };
         }
 
         pub fn dot(comptime self: Self, comptime other: Self) f64 {
